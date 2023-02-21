@@ -30,6 +30,7 @@ snack_label = {
     "whale_food": "고래밥"
 }
 
+# 테스트
 def snack_list(name):
     answer_text = ''
     if name in input_text:
