@@ -33,7 +33,7 @@ snack_label = {
 def snack_list(name):
     answer_text = ''
     if name in input_text:
-        answer_text = print('{} 재고는 {} 입니다.'.format(name, count))
+        answer_text = print('{} 재고는 {}개 입니다.'.format(name, count))
     else:
         print('다시 한 번 말씀해주시겠어요?')
     return answer_text
