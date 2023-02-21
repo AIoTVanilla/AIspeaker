@@ -33,12 +33,3 @@ def favorite_snack():
 
     return fav_snack_ko
 print('현재 인기 간식은 {} 입니다.'.format(favorite_snack()))
-
-
-# input_text = ''
-# input_text = '인기'
-# answer_text = ''
-# if '인기' in input_text:
-#     answer_text = print('현재 인기 간식은 {} 입니다.'.format(favorite_snack()))
-# else:
-#     print('다시 한 번 말씀해주시겠어요?')
