@@ -8,19 +8,19 @@ headers = {}
 
 response = requests.request("GET", url, headers=headers, data=payload)
 
-print(response.text)
+# print(response.text)
 
 data = response.text
 data = json.loads(data) # json 파일로 데이터 받아오기
 
 snacklist = data["result"]
-print(snacklist)
+# print(snacklist)
 
 for index in snacklist:
     name = index["name"]
-    print(name)
+    # print(name)
     count = index["count"]
-    print(count)
+    # print(count)
 
 snack_label = {
     "chicken_legs": "닭다리",
@@ -29,6 +29,9 @@ snack_label = {
     "ramen_snack": "쫄병스낵",
     "whale_food": "고래밥"
 }
+# for value in snack_label.values():
+#     name_ko = value
+#     print(name_ko)
 
 def snack_list(name):
     answer_text = ''
@@ -37,6 +40,6 @@ def snack_list(name):
     else:
         print('다시 한 번 말씀해주시겠어요?')
     return answer_text
-
-input_text = '칸쵸'
-snack_list(input_text)
+#
+# input_text = '칸쵸'
+# snack_list(input_text)
