@@ -23,4 +23,4 @@ def snack_count(count):
 
     return answer_text
 #
-# print(snack_count(count))
+print(snack_count(count))

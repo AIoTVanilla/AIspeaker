@@ -30,6 +30,7 @@ def favorite_snack():
     for label in fav_snack:
         fav_snack_ko.append(snack_label[label])
         # print(fav_snack_ko)
+    answer_text = '현재 인기 간식은 {} 입니다.'.format(fav_snack_ko)
+    return answer_text
 
-    return fav_snack_ko
-# print('현재 인기 간식은 {} 입니다.'.format(favorite_snack()))
+print(favorite_snack())

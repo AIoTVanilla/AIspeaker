@@ -1,5 +1,4 @@
 import socketio
-import json
 
 sio = socketio.Client()
 sio.connect('ws://192.168.50.151:9999')
