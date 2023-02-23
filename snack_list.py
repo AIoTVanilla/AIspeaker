@@ -1,55 +1,39 @@
 import requests
 import json
+from vanilla_config import base_url
 
-url = "http://192.168.50.151:9999/request_snack_list"
+url = "%s/request_snack_list" % base_url
 
-payload={}
-headers = {}
+def snack_list(ko_name):
+    payload={}
+    headers = {}
 
-response = requests.request("GET", url, headers=headers, data=payload)
+    response = requests.request("GET", url, headers=headers, data=payload)
+    data = response.text
+    data = json.loads(data) # json 파일로 데이터 받아오기
 
-# print(response.text)
+    snack_label = {
+        "chicken_legs": "닭다리",
+        "kancho": "칸쵸",
+        "rollpoly": "롤리폴리",
+        "ramen_snack": "쫄병스낵",
+        "whale_food": "고래밥"
+    }
+    ko_names = list(snack_label.values())
+    index = ko_names.index(ko_name)
+    en_name = list(snack_label.keys())[index]
 
-data = response.text
-data = json.loads(data) # json 파일로 데이터 받아오기
-
-snacklist = data["result"]
-print(snacklist)
-
-snack_label = {
-    "chicken_legs": "닭다리",
-    "kancho": "칸쵸",
-    "rollpoly": "롤리폴리",
-    "ramen_snack": "쫄병스낵",
-    "whale_food": "고래밥"
-}
-
-for key, value in snack_label.items():
-    name_en = key
-    name_ko = value
-    # print(name_en, name_ko)
-
-for index in snacklist:
-    list_name = index["name"]
-    list_count = index["count"]
-    # print(list_name, list_count)
-#     for index in snacklist:
-#         name = index["name"]
-#         count = index["count"]
-#         if name_en == name:
-#             name = name_ko
-
-def snack_list(name):
-    answer_text = ''
-    if name in input_text:
-        if name_ko == name:
-            print(name)
-            a = list_name[name_en]
-            print(a)
-            answer_text = '{} 재고는 {}개 입니다.'.format(name, list_count)
-    else:
-        answer_text = '다시 한 번 말씀해주시겠어요?'
+    result = data["result"]
+    for item in result:
+        item_name = item["name"]
+        if item_name == en_name:
+            count = item["count"]
+            answer_text = '{} 재고는 {}개 입니다.'.format(ko_name, count)
+            break
+        else:
+            answer_text = '다시 한 번 말씀해주시겠어요?'
     return answer_text
-#
-input_text = '칸쵸'
-print(snack_list(input_text))
+
+if __name__ == "__main__":
+    input_text = '칸쵸'
+    print(snack_list(input_text))

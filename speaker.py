@@ -33,15 +33,15 @@ def speak(text):
     tts = gTTS(text=text, lang='ko')
     tts.save(file_name)
     playsound(file_name)
-    if os.path.exists(file_name):   # voice.mp3 파일 삭제
-        os.remove(file_name)
+    # if os.path.exists(file_name):   # voice.mp3 파일 삭제
+    #     os.remove(file_name)
 
 
 r = sr.Recognizer()
 m = sr.Microphone()
 
 speak('무엇을 도와드릴까요?')
-stop_listening = r.listen_in_background(m, listen)
+stop_listening = r.listen_in_background(m, listen, 4)
 # stop_listening(wait_for_stop=False) # 더 이상 듣지 않음
 
 while True:
