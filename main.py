@@ -57,20 +57,20 @@ def answer(input_text):
             answer_text = sc.snack_count()
         # elif input_text in snack_label.values():    # snack_list
         #     answer_text = sl.snack_list(input_text)
-        else:
+        elif input_text != "":
             for snack in snack_names:
                 if snack in input_text:
                     answer_text = sl.snack_list(snack)
                     break
         
-        if answer_text != "":
-            speaker_tts(answer_text)
+        print("answer_text", answer_text)
+        speaker_tts(answer_text)
     except Exception as ex:
         print("[Error_main]", ex)
 
 
 def listening_word():
-    speaker_tts("이병 바닐라")
+    speaker_tts("말씀하세요")
     speak_effect()
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -78,14 +78,15 @@ def listening_word():
         audio = r.listen(source, timeout=4, phrase_time_limit=4)
         print("......")
 
+        message = ""
         try:
-            text = r.recognize_google(audio, language='ko')
-            answer(text)
-            # speaker_stt(text)
+            message = r.recognize_google(audio, language='ko')
         except sr.UnknownValueError:
             print("Recognizer Failed..")
         except sr.RequestError as e:
             print("Request Failed...", e)
+        finally:
+            answer(message)
 
 
 if __name__ == "__main__":
