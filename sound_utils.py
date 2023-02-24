@@ -25,6 +25,18 @@ def speaker_tts(text):
     say = AudioSegment.from_file(fp, format="mp3")
     song_speed = say.speedup(playback_speed=speed, chunk_size=150, crossfade=25)
     play(song_speed)
-    if os.path.exists(file_name):   # voice.mp3 파일 삭제
-        os.remove(file_name)
+    # if os.path.exists(file_name):   # voice.mp3 파일 삭제
+    #     os.remove(file_name)
+    is_speak = False
+
+def speak_effect():
+    global is_speak
+    if is_speak: return
+    is_speak = True
+    # speed = 1.25
+    say = AudioSegment.from_file('resources/dong.wav', format="wav")
+    # song_speed = say.speedup(playback_speed=speed, chunk_size=150, crossfade=25)
+    play(say)
+    # if os.path.exists(file_name):   # voice.mp3 파일 삭제
+    #     os.remove(file_name)
     is_speak = False

@@ -24,10 +24,9 @@ def snack_list(ko_name):
     en_name = list(snack_label.keys())[index]
 
     result = data["result"]
-    for item in result:
-        item_name = item["name"]
-        if item_name == en_name:
-            count = item["count"]
+    for item in result.keys():
+        if item == en_name:
+            count = result[item]
             answer_text = '{} 재고는 {}개 입니다.'.format(ko_name, count)
             break
         else:
