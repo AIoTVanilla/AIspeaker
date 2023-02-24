@@ -30,7 +30,7 @@ def snack_list(ko_name):
             answer_text = '{} 재고는 {}개 입니다.'.format(ko_name, count)
             break
         else:
-            answer_text = '다시 한 번 말씀해주시겠어요?'
+            answer_text = '다시 불러주세요'
     return answer_text
 
 if __name__ == "__main__":
