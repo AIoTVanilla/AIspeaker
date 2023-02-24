@@ -4,19 +4,20 @@ from io import BytesIO
 from pydub import AudioSegment
 from pydub.playback import play
 import os
-import subprocess
 
 is_speak = False
+count = 0
 
-def espeak(text: str) -> int:
-    os.system('espeak -vko+f3 "{0}" >/dev/null'.format(text))
 ############################################
 #                   TTS                    #
 ############################################    SPEAK
 def speaker_tts(text):
     global is_speak
-    if is_speak: return
+    if is_speak:
+        print("can't play audio")
+        return
     is_speak = True
+    print("play count::", count)
     print('[바닐라]' + text)
     # espeak(text)
 
@@ -31,6 +32,7 @@ def speaker_tts(text):
     play(song_speed)
     # if os.path.exists(file_name):   # voice.mp3 파일 삭제
     #     os.remove(file_name)
+    count += 1
     is_speak = False
 
 def speak_effect():
