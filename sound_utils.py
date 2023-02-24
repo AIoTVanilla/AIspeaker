@@ -3,6 +3,7 @@ from playsound import playsound
 from io import BytesIO
 from pydub import AudioSegment
 from pydub.playback import play
+import os
 
 
 is_speak = False
@@ -24,6 +25,6 @@ def speaker_tts(text):
     say = AudioSegment.from_file(fp, format="mp3")
     song_speed = say.speedup(playback_speed=speed, chunk_size=150, crossfade=25)
     play(song_speed)
-    # if os.path.exists(file_name):   # voice.mp3 파일 삭제
-    #     os.remove(file_name)
+    if os.path.exists(file_name):   # voice.mp3 파일 삭제
+        os.remove(file_name)
     is_speak = False
