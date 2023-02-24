@@ -21,13 +21,20 @@ snack_label = {
 def speaker_stt(r, audio):
     try:
         # 구글 API로 인식 (하루 50회)
-        text = r.recognize_google(audio, language='ko')
-        print('[나]' + text)
+        text = r.recognize_google(audio, language='ko', show_all=True)
+        if 'alternative' in dict(text).keys():
+            text = dict(text)['alternative'][0]['transcript']
+        else:
+            text = ""
+        print(text)
+        # print('[나]' + text)
         answer(text)
     except sr.UnknownValueError:
         print('인식 실패') # 음성 인식 실패한 경우
     except sr.RequestError as e:
         print('요청 실패: {0}'.format(e))   # API key 오류, 네트워크 단절 등
+    except Exception as err:
+        print('[Error]', err)
 
 
 ############################################
@@ -47,7 +54,6 @@ def answer(input_text):
         elif '재고' in input_text:    # snack_count
             answer_text = sc.snack_count()
         elif input_text in snack_label.values():    # snack_list
-            print("snack", input_text)
             answer_text = sl.snack_list(input_text)
         else:
             answer_text = '다시 한 번 말씀해주시겠어요?'

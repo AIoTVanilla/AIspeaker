@@ -1,5 +1,9 @@
 from gtts import gTTS
 from playsound import playsound
+from io import BytesIO
+from pydub import AudioSegment
+from pydub.playback import play
+
 
 is_speak = False
 
@@ -11,10 +15,15 @@ def speaker_tts(text):
     if is_speak: return
     is_speak = True
     print('[바닐라]' + text)
-    file_name = 'voice.mp3'
-    tts = gTTS(text=text, lang='ko')
-    tts.save(file_name)
-    playsound(file_name)
+    tts = gTTS(text=text, lang="ko", tld="co.kr", slow="False")
+    fp = BytesIO()
+    tts.write_to_fp(fp)
+    fp.seek(0)
+
+    speed = 1.25
+    say = AudioSegment.from_file(fp, format="mp3")
+    song_speed = say.speedup(playback_speed=speed, chunk_size=150, crossfade=25)
+    play(song_speed)
     # if os.path.exists(file_name):   # voice.mp3 파일 삭제
     #     os.remove(file_name)
     is_speak = False
