@@ -2,6 +2,7 @@ import requests
 import json
 from vanilla_config import base_url
 
+# this is test
 url = "%s/request_snack_list" % base_url
 
 def snack_list(ko_name):
