@@ -6,7 +6,6 @@ from pydub.playback import play
 import os
 
 is_speak = False
-count = 0
 
 ############################################
 #                   TTS                    #
@@ -17,7 +16,6 @@ def speaker_tts(text):
         print("can't play audio")
         return
     is_speak = True
-    print("play count::", count)
     print('[바닐라]' + text)
     # espeak(text)
 
@@ -32,7 +30,6 @@ def speaker_tts(text):
     play(song_speed)
     # if os.path.exists(file_name):   # voice.mp3 파일 삭제
     #     os.remove(file_name)
-    count += 1
     is_speak = False
 
 def speak_effect():
@@ -40,10 +37,10 @@ def speak_effect():
     if is_speak: return
     is_speak = True
     # speed = 1.25
-    os.system('aplay resources/dong.wav')
-    # say = AudioSegment.from_file('resources/dong.wav', format="wav")
+    # os.system('aplay resources/dong.wav')
+    say = AudioSegment.from_file('resources/dong.wav', format="wav")
     # song_speed = say.speedup(playback_speed=speed, chunk_size=150, crossfade=25)
-    # play(say)
+    play(say)
     # if os.path.exists(file_name):   # voice.mp3 파일 삭제
     #     os.remove(file_name)
     is_speak = False
