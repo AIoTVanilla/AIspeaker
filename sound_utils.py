@@ -2,8 +2,9 @@ from gtts import gTTS
 from playsound import playsound
 from io import BytesIO
 from pydub import AudioSegment
-from pydub.playback import play
+from pydub.playback import play, _play_with_ffplay
 import os
+import time
 
 
 is_speak = False
@@ -18,6 +19,8 @@ def speaker_tts(text):
     is_speak = True
 
     try:
+        os.system('pulseaudio --D')
+        # os.system('pulseaudio --start')
         print("play count::", count)
         print('[바닐라]' + text)
         tts = gTTS(text=text, lang="ko", tld="co.kr", slow="False")
@@ -28,7 +31,7 @@ def speaker_tts(text):
         speed = 1.25
         say = AudioSegment.from_file(fp, format="mp3")
         song_speed = say.speedup(playback_speed=speed, chunk_size=150, crossfade=25)
-        play(song_speed)
+        _play_with_ffplay(song_speed)
         # if os.path.exists(file_name):   # voice.mp3 파일 삭제
         #     os.remove(file_name)
     finally:
@@ -54,3 +57,8 @@ def speak_effect():
         is_speak = False
     finally:
         is_speak = False
+    
+if __name__ == "__main__":
+    while True:
+        speaker_tts("다시 말씀해주세요")
+        time.sleep(10)
