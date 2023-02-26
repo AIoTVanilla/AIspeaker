@@ -174,7 +174,7 @@ def main():
 
     parser.add_argument('--access_key',
                         help='AccessKey obtained from Picovoice Console (https://console.picovoice.ai/)',
-                        default="hNfHpA/bbftI4HL57qCU2/ky3n8H61vh/P4hMPsZAvTC+19BP9m8RA==")
+                        default="baac4cjAKpWGqmOae4DCh2JxgH2zhMwyUh5F9q/AedELMYOMwyC9+g==")
 
     parser.add_argument(
         '--keywords',
