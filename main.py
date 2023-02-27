@@ -55,6 +55,12 @@ def answer(input_text):
             answer_text = fs.favorite_snack()
         elif '재고' in input_text:    # snack_count
             answer_text = sc.snack_count()
+        elif '최고' in input_text:    # snack_count
+            answer_text = sc.snack_count()     
+        elif '개수' in input_text:    # snack_count
+            answer_text = sc.snack_count()
+        elif '합계' in input_text:    # snack_count
+            answer_text = sc.snack_count()
         # elif input_text in snack_label.values():    # snack_list
         #     answer_text = sl.snack_list(input_text)
         elif input_text != "":
@@ -70,23 +76,27 @@ def answer(input_text):
 
 
 def listening_word():
-    speaker_tts("말씀하세요")
-    speak_effect()
-    r = sr.Recognizer()
-    with sr.Microphone() as source:
-        print("listening_word....")
-        audio = r.listen(source, timeout=4, phrase_time_limit=4)
-        print("......")
+    try:
+        speaker_tts("말씀하세요")
+        speak_effect()
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
+            message = ""
+            try:
+                print("listening_word....")
+                audio = r.listen(source, timeout=4, phrase_time_limit=4)
+                print("......")
 
-        message = ""
-        try:
-            message = r.recognize_google(audio, language='ko')
-        except sr.UnknownValueError:
-            print("Recognizer Failed..")
-        except sr.RequestError as e:
-            print("Request Failed...", e)
-        finally:
-            answer(message)
+                message = r.recognize_google(audio, language='ko')
+            except sr.UnknownValueError:
+                print("Recognizer Failed..")
+            except sr.RequestError as e:
+                print("Request Failed...", e)
+            finally:
+                answer(message)
+    except Exception as ex:
+        print("[Error]", ex)
+
 
 
 if __name__ == "__main__":
